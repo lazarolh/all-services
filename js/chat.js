@@ -1,11 +1,11 @@
 /**
- * Nombre del programa: supabase.js
+ * Nombre del programa: chat.js
  * ¿Para que sirve?
- * El propósito de este programa es crear la conexión con la base de datos alojada en supabase y poder manipular los datos
+ * El propósito de este programa es manejar la lógica del chat y la interfaz de pago
  * 
  * Autor: Lázaro López Hernández
  * 
- * Fecha de creacion: 10 de abril del 2025
+ * Fecha de creacion: 20 de abril del 2025
  * Fecha de entrega: 24 de mayo del 2025
  */
 <script>
