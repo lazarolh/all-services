@@ -1,5 +1,4 @@
-<!-- 
- * Nombre del programa: script.sql
+/* * Nombre del programa: script.sql
  * ¿Para que sirve?
  * Este script tiene la funcionalidad de crear las tablas necesarias en la base de datos de supabase, con tecnología postgres, que son necesarias 
   * para la gestión de la información manejada en la aplicación
@@ -13,7 +12,6 @@
  * Fecha de creacion: 8 de abril del 2025
  * Fecha de entrega: 24 de mayo del 2025
  */ 
--->
 create table profiles (
   id uuid primary key references auth.users on delete cascade,
   username text,
