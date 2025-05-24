@@ -1,0 +1,455 @@
+<!-- 
+ * Nombre del programa: index.html
+ * ¿Para que sirve?
+ * Este archivo contiene la estructura en lenguaje HTML que tiene los elementos para la aplicación, entre los cuales se encuentran:
+ campos de texto, botones, listas desplegables, contenedores para organizar visualmente los elementos mismos
+
+ * Autor: Erika Daniela Martinez Villa, 
+          Lázaro López Hernández, 
+          Ricardo Parra Bonilla, 
+          Ángel de Jesús Callejas Graillet,
+          Jesús Alberto Apolinar Hermenegildo
+ * 
+ * Fecha de creacion: 8 de abril del 2025
+ * Fecha de entrega: 24 de mayo del 2025
+ */ 
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body class="bg-light">
+  <!-- Barra de Navegación 
+  Contiene el menú principal dentro de la interfaz de la aplicación para moverse entre las distintas secciones 
+  -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary d-none" id="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">All Services <i class="fas fa-tools fa-lg"
+          style="color: #ffffff;"></i> </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#" id="nav-home">Inicio <i class="fas fa-home fa-lg"
+                style="color: #63E6BE;"></i> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#" id="nav-profile">Perfil <i class="fas fa-user-alt fa-lg"
+                style="color: #63E6BE;"></i> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#" id="nav-logout">Cerrar sesión <i class="fas fa-sign-out-alt fa-lg"
+                style="color: #63E6BE;"></i> </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sección para las publicaciones-->
+  <div class="container py-5 d-none" id="post-container">
+    <div class="col-md-8 mx-auto">
+      <div class="card p-3">
+        <h3>Publicaciones</h3>
+        <div class="mb-3">
+          <textarea class="form-control" id="post-content" rows="3"
+            placeholder="Escribe tu publicación para darte a conocer..."></textarea>
+        </div>
+        <button class="btn btn-primary" id="create-post-btn">Crear publicación <i
+            class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div class="container py-4">
+      <!-- Filtros -->
+      <div class="card mb-4 shadow-sm p-3">
+        <h5 class="mb-3">Filtrar publicaciones</h5>
+        <div class="row g-2">
+          <div class="col-md-4">
+            <select id="category-filter" class="form-select">
+              <option value="" disabled selected>Todas las categorías</option>
+              <option value="albañilería">Albañilería</option>
+              <option value="jardinería">Jardinería</option>
+              <option value="plomería">Plomería</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <input id="text-filter" type="text" class="form-control" placeholder="Buscar por palabra clave">
+          </div>
+          <div class="col-md-4">
+            <button id="clear-filters" class="btn btn-outline-secondary w-100">Quitar filtros</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="posts-list" class="mt-4"></div>
+  </div>
+
+  <!-- Sección para el perfil -->
+  <div class="container py-5 d-none" id="profile-container">
+    <h3>Perfil</h3>
+    <div id="profile-info">
+      <!-- Aquí se cargará la información del perfil -->
+    </div>
+    <div id="profile-rating" class="mt-4">
+      <button class="btn btn-warning" id="rate-profile-btn">Calificar</button>
+      <button class="btn btn-secondary mt-3" id="edit-profile-btn">Editar perfil</button>
+      <div id="edit-profile-form" class="mt-3 d-none">
+        <div class="mb-3">
+          <label class="form-label">Teléfono</label>
+          <input type="text" class="form-control" id="edit-phone">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Ubicación</label>
+          <input type="text" class="form-control" id="edit-location">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Biografía</label>
+          <textarea class="form-control" id="edit-bio" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary" id="save-profile-btn">Guardar cambios</button>
+        <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Cancelar</button>
+      </div>
+      <!-- Bootstrap Icons -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+      <!-- Botón de burbuja -->
+      <button id="chatToggle" class="btn rounded-circle shadow-lg"
+        style="background-color: #ff4081; color: white; position: fixed; bottom: 100px; right: 20px; width: 65px; height: 65px; z-index: 1000;">
+        <i class="bi bi-chat-dots-fill fs-3"></i>
+      </button>
+
+      <!-- Ventana de chat -->
+      <div id="chatBox" class="card border-0 shadow-lg"
+        style="border-radius: 15px; position: fixed; bottom: 90px; right: 20px; width: 320px; display: none; z-index: 1000;">
+        <div class="card-header text-black"
+          style="background: linear-gradient(135deg, #ff4081, #ff80ab); border-top-left-radius: 15px; border-top-right-radius: 15px;">
+          <strong>Chat</strong>
+          <button type="button" class="btn-close btn-close-white float-end" id="closeChat"></button>
+        </div>
+        <div class="card-body" id="chatMessages" style="height: 220px; overflow-y: auto; background-color: #fff3f8;">
+          <div class="mb-2 p-2 rounded bg-white shadow-sm text-muted" style="max-width: 85%;">Hola, chateemos y hagamos
+            trato</div>
+        </div>
+        <div class="card-footer p-2"
+          style="background-color: #fff0f5; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+          <div class="input-group">
+            <input type="text" id="chatInput" class="form-control border-0" placeholder="Escribe un mensaje...">
+            <button class="btn text-white" style="background-color: #ff4081;" id="sendBtn">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+          <br>
+          <div class="text-center mt-2">
+            <button id="payBtn" class="btn btn-warning btn-sm w-100">
+              <i class="bi bi-credit-card"></i> Pagar con tarjeta
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Interfaz de pago -->
+      <div id="paymentBox" class="card shadow-lg border-0"
+        style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; border-radius: 15px; z-index: 1001;">
+        <div class="card-header bg-warning text-dark"
+          style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+          <strong>Pagar con Tarjeta</strong>
+          <button type="button" class="btn-close float-end" id="closePayment"></button>
+        </div>
+        <div class="card-body text-dark" style="background-color: #fff8e1;">
+          <form id="paymentForm" novalidate>
+            <div class="mb-2">
+              <label class="form-label">Número de tarjeta</label>
+              <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"
+                required pattern="^(\d{4} ?){4}$">
+              <div class="invalid-feedback">Debe tener 16 dígitos en formato 1234 5678 9012 3456.</div>
+              <div class="invalid-feedback">Debe tener 16 dígitos.</div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Fecha de expiración (MM/AA)</label>
+              <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA" required
+                pattern="^(0[1-9]|1[0-2])\/\d{2}$">
+              <div class="invalid-feedback">Formato inválido. Usa MM/AA.</div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">CVC</label>
+              <input type="text" class="form-control" id="cardCVC" placeholder="123" required pattern="^\d{3,4}$">
+              <div class="invalid-feedback">Debe tener 3 o 4 dígitos.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Nombre en la tarjeta</label>
+              <input type="text" class="form-control" id="cardName" required pattern="^[a-zA-Z\s]+$">
+              <div class="invalid-feedback">Solo letras y espacios permitidos.</div>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Pagar</button>
+          </form>
+        </div>
+      </div>
+      <!-- Modal de comisión -->
+      <div class="modal fade" id="commissionModal" tabindex="-1" aria-labelledby="commissionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-warning">
+              <h5 class="modal-title" id="commissionModalLabel">Información</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              Le sugerimos realizar el pago después de que el trabajo se haya realizado.
+              El pago ya incluye el 15% de comisión para AllServices.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script>
+        const chatToggle = document.getElementById('chatToggle');
+        const chatBox = document.getElementById('chatBox');
+        const closeChat = document.getElementById('closeChat');
+
+        chatToggle.addEventListener('click', () => {
+          chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+        });
+
+        closeChat.addEventListener('click', () => {
+          chatBox.style.display = 'none';
+        });
+        const payBtn = document.getElementById('payBtn');
+        const paymentBox = document.getElementById('paymentBox');
+        const closePayment = document.getElementById('closePayment');
+        const paymentForm = document.getElementById('paymentForm');
+
+        payBtn.addEventListener('click', () => {
+          const commissionModal = new bootstrap.Modal(document.getElementById('commissionModal'));
+          commissionModal.show();
+
+          const paymentBox = document.getElementById('paymentBox');
+
+          const modalEl = document.getElementById('commissionModal');
+          modalEl.addEventListener('hidden.bs.modal', () => {
+            chatBox.style.display = 'none';
+            paymentBox.style.display = 'block';
+          }, { once: true });
+        });
+
+        closePayment.addEventListener('click', () => {
+          paymentBox.style.display = 'none';
+        });
+
+        paymentForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          // Referencias a los campos
+          const cardNumber = document.getElementById('cardNumber');
+          const cardExpiry = document.getElementById('cardExpiry');
+          const cardCVC = document.getElementById('cardCVC');
+          const cardName = document.getElementById('cardName');
+
+          let valid = true;
+
+          // Validaciones 
+          [cardNumber, cardExpiry, cardCVC, cardName].forEach(input => {
+            if (!input.checkValidity()) {
+              input.classList.add('is-invalid');
+              valid = false;
+            } else {
+              input.classList.remove('is-invalid');
+            }
+          });
+
+          // Validar fecha lógica 
+          const [mm, yy] = cardExpiry.value.split('/');
+          const currentDate = new Date();
+          const expDate = new Date(`20${yy}`, parseInt(mm), 1);
+
+          if (expDate < currentDate) {
+            cardExpiry.classList.add('is-invalid');
+            valid = false;
+          } else {
+            cardExpiry.classList.remove('is-invalid');
+          }
+
+          if (valid) {
+            alert('Pago procesado correctamente.');
+            paymentBox.style.display = 'none';
+            paymentForm.reset();
+          }
+        });
+
+        // Solo permitir números y espacios en el número de tarjeta
+        cardNumber.addEventListener('input', () => {
+          let raw = cardNumber.value.replace(/\D/g, '').slice(0, 16);
+          let formatted = raw.match(/.{1,4}/g)?.join(' ') || ''; // agrupar cada 4 dígitos
+          cardNumber.value = formatted;
+        });
+
+        // Solo permitir MM/AA 
+        cardExpiry.addEventListener('input', () => {
+          let cleaned = cardExpiry.value.replace(/[^\d]/g, '');
+          if (cleaned.length >= 2) {
+            cleaned = cleaned.slice(0, 2) + '/' + cleaned.slice(2, 4);
+          }
+          cardExpiry.value = cleaned.slice(0, 5);
+        });
+
+        // Solo permitir números en CVC
+        cardCVC.addEventListener('input', () => {
+          cardCVC.value = cardCVC.value.replace(/[^\d]/g, '').slice(0, 4);
+        });
+
+        // Solo letras y espacios para el nombre
+        cardName.addEventListener('input', () => {
+          cardName.value = cardName.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
+        const sendBtn = document.getElementById('sendBtn');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+
+        sendBtn.addEventListener('click', () => {
+          const message = chatInput.value.trim();
+          if (message !== "") {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = "mb-2 p-2 rounded bg-primary text-white ms-auto";
+            messageDiv.style.maxWidth = "85%";
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatInput.value = "";
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }
+        });
+      </script>
+    </div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="container py-5" id="login-container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow" id="login-card">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Iniciar Sesión</h3>
+            <form id="login-form">
+              <div class="mb-3">
+                <label for="login-username" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="login-username" placeholder="Introduce tu usuario" required>
+              </div>
+              <div class="mb-3">
+                <label for="login-password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="login-password" placeholder="Introduce tu contraseña"
+                  required>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <a href="#" id="show-register">¿No tienes cuenta? Regístrate</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de registro -->
+        <div class="card shadow mt-4 d-none" id="register-card">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Registro</h3>
+            <form id="register-form">
+              <div class="mb-3">
+                <label for="register-username" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="register-username" placeholder="Introduce un nombre usuario"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="register-password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="register-password" placeholder="Crea una contraseña"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="register-phone" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="register-phone" placeholder="Introduce tu telefono"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="register-location" class="form-label">Ubicación</label>
+                <input type="text" class="form-control" id="register-location"
+                  placeholder="Escribe la zona en la que puedes trabajar" required>
+              </div>
+              <div class="mb-3">
+                <label for="register-bio" class="form-label">Biografía</label>
+                <textarea class="form-control" id="register-bio" rows="3"
+                  placeholder="Cuéntanos sobre ti..."></textarea>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success">Registrarme</button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <a href="#" id="show-login">¿Ya tienes cuenta? Inicia sesión</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="app-footer text-center text-muted small">
+    <div style="color: white;">
+      ¿Necesitas ayuda o tienes sugerencias? Contáctanos en <a href="mailto:soporte@allservices.com"
+        class="text-decoration-none text-info">soporte@allservices.com</a>
+    </div>
+  </footer>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Llamado a la clase principal de Javascript -->
+  <script type="module" src="js/main.js"></script>
+  <!-- Script para manejar la aparición de los elementos principales en la interfaz del usuario-->
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Elementos
+      const loginCard = document.getElementById('login-card');
+      const registerCard = document.getElementById('register-card');
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+      const showRegister = document.getElementById('show-register');
+      const showLogin = document.getElementById('show-login');
+      const navbar = document.getElementById('navbar');
+      const postContainer = document.getElementById('post-container');
+      const postsList = document.getElementById('posts-list');
+      const profileContainer = document.getElementById('profile-container');
+      const profileInfo = document.getElementById('profile-info');
+      const profileRating = document.getElementById('profile-rating');
+      const rateProfileBtn = document.getElementById('rate-profile-btn');
+      const navProfile = document.getElementById('nav-profile');
+      const navLogout = document.getElementById('nav-logout');
+      const navHome = document.getElementById('nav-home');
+      const postContent = document.getElementById('post-content');
+      const createPostBtn = document.getElementById('create-post-btn');
+
+      // Mostrar la página de inicio
+      navHome.addEventListener('click', () => {
+        postContainer.classList.remove('d-none');
+        profileContainer.classList.add('d-none');
+      });
+
+
+      loadPosts();
+    });
+
+  </script>
+
+</body>
+
+</html>
