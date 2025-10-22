@@ -5,10 +5,9 @@
  * esto ocurre al iniciar sesión en la aplicación, y tambíen se encuentra la lógica para filtrar las publicaciones
  * 
  * Autor: Lázaro López Hernández
- *        Ricardo Parra Bonilla
  * 
  * Fecha de creacion: 20 de abril del 2025
- * Fecha de entrega: 24 de mayo del 2025
+ * 
  */
 import { supabase } from './supabase.js';
 const postContent = document.getElementById('post-content');
@@ -88,4 +87,5 @@ document.getElementById('clear-filters').addEventListener('click', () => {
     document.getElementById('category-filter').value = '';
     document.getElementById('text-filter').value = '';
     loadPosts();
+
 });
