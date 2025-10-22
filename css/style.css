@@ -2,10 +2,8 @@
  * Nombre del programa: style
  * ¿Para que sirve?
  * Este archivo sirve para crear los estilos, colores  y tamaños que tendrán los elementos dentro de la estrctura de la aplicación
- * Autor: Erika Daniela Martinez Villa
- * 
- * Fecha de creacion: 10 de abril del 2025
- * Fecha de entrega: 24 de mayo del 2025
+ * Autor: Lázaro López Hernández
+ *
  */ 
    /* Paleta de colores*/
     :root {
@@ -109,4 +107,5 @@
         z-index: 1000;
         font-size: 0.85rem;
         border-top: 1px solid #333;
+
     }
