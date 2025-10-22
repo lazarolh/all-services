@@ -1,0 +1,1 @@
+Este proyecto escolar es para comercio electronico Una aplicación web tipo red social, con interfaces elaboradas con HTML, Bootstrap y Javascript. Con la parte backend elaborada con Javascript Desplegada en netlify con una base de datos en Supabase con tecnología PostgreSQL
