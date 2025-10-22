@@ -5,10 +5,10 @@
  * en donde se muestra la información de los usuarios
  * 
  * Autor: Lázaro López Hernández
- *        Erika Daniela Martinez Villa
+ *        
  * 
  * Fecha de creacion: 20 de abril del 2025
- * Fecha de entrega: 24 de mayo del 2025
+ * 
  */
 import { supabase } from './supabase.js';
 // Elementos
@@ -195,4 +195,5 @@ document.getElementById('rate-profile-btn')?.addEventListener('click', async () 
         alert('Gracias por tu calificación.');
         window.viewProfile(userId); // recarga el perfil actualizado
     }
+
 });
