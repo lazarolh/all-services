@@ -3,12 +3,10 @@
  * ¿Para que sirve?
  * Este programa maneja la lógica para el inicio y cierre de sesión, además de manejar el proceso del registro de un usuario nuevo
  * 
- * Autor: Lázaro López Hernández, 
- *        Ángel de Jesús Callejas Graillet, 
- *        Jesús Alberto Apolinar Hermenegildo
+ * Autor: Lázaro López Hernández
  * 
  * Fecha de creacion: 20 de abril del 2025
- * Fecha de entrega: 24 de mayo del 2025
+ * 
  */
 import { supabase } from './supabase.js';
 import { loadPosts } from './posts.js';
@@ -94,3 +92,4 @@ document.getElementById('nav-logout')?.addEventListener('click', () => {
     loginCard.classList.remove('d-none');
     loginForm.reset();
 });
+
